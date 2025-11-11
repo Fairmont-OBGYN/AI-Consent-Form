@@ -3,6 +3,6 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: "/consent-form-website/",
+  base: "/AI-Consent-Form/",
   plugins: [react()],
 })
