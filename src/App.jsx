@@ -12,13 +12,14 @@ function App() {
     name: "",
     dob: "",
     date: "",
+    doctor: "",
   });
 
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
+    setForm({ ...form, [name]: value });    
   };
 
   const clearSignatures = () => {
@@ -45,7 +46,7 @@ function App() {
     let yPos = 20;
     pdf.setFontSize(11);
     pdf.setFont("helvetica", "bold");
-    pdf.text("Dr. Stephanie Rhome Inc.", 20, yPos);
+    pdf.text(`${form.doctor} Inc.`, 20, yPos);
     yPos += 4;
     pdf.text("Fairmont Obstetrics & Gynecology", 20, yPos);
     yPos += 4;
@@ -68,7 +69,7 @@ function App() {
     const leftMargin = 20;
 
     // Paragraph 1
-    const para1 = "To enhance the quality of care and improve documentation efficiency, Dr. Rhome utilizes an AI scribe tool during patient visits. This technology assists with note-taking by generating a temporary audio recording of the conversation. The purpose is to allow the provider to focus more fully on the patient rather than typing during the visit.";
+    const para1 = `To enhance the quality of care and improve documentation efficiency, ${form.doctor} utilizes an AI scribe tool during patient visits. This technology assists with note-taking by generating a temporary audio recording of the conversation. The purpose is to allow the provider to focus more fully on the patient rather than typing during the visit.`;
     const para1Lines = pdf.splitTextToSize(para1, maxWidth);
     para1Lines.forEach((line) => {
       pdf.text(line, leftMargin, yPos);
@@ -77,7 +78,7 @@ function App() {
     yPos += 3;
 
     // Paragraph 2
-    const para2 = "With your permission, the AI scribe will create a temporary audio recording solely for the purpose of drafting a clinical summary. This summary will be reviewed and finalized by Dr. Rhome before being added to the patient's medical chart.";
+    const para2 = `With your permission, the AI scribe will create a temporary audio recording solely for the purpose of drafting a clinical summary. This summary will be reviewed and finalized by ${form.doctor} before being added to the patient's medical chart.`;
     const para2Lines = pdf.splitTextToSize(para2, maxWidth);
     para2Lines.forEach((line) => {
       pdf.text(line, leftMargin, yPos);
@@ -195,6 +196,11 @@ function App() {
         }
       }
 
+      if (!form.doctor) {
+        alert("Please select a doctor before submitting.");
+        return;
+      }
+
       console.log("Creating PDF...");
       const pdf = generatePDF(patientSig, witnessSig);
       
@@ -224,8 +230,7 @@ function App() {
   return (
     <div className="form-container">
       <div className="header">
-        <h2>Dr. Stephanie Rhome Inc. (28132)</h2>
-        <p>Fairmont Obstetrics & Gynecology</p>
+        <h2>Fairmont Obstetrics & Gynecology</h2>
         <p>915-750 W Broadway, Vancouver, BC V5Z 1H8</p>
         <p>Phone: 604-878-8050 | Fax: 604-875-8099</p>
       </div>
@@ -234,13 +239,12 @@ function App() {
 
       <div className="intro-section">
         <p>
-          To enhance the quality of care and improve documentation efficiency, Dr.
-          Rhome utilizes an AI scribe tool during patient visits. This technology
+          To enhance the quality of care and improve documentation efficiency, the doctors at Fairmont Obstetrics & Gynecology utilizes an AI scribe tool during patient visits. This technology
           assists with note-taking by generating a temporary audio recording of
           the conversation. The purpose is to allow the provider to focus more fully on the patient rather than typing during the visit.
         </p>
         <p>
-          With your permission, the AI scribe will create a temporary audio recording solely for the purpose of drafting a clinical summary. This summary will be reviewed and finalized by Dr. Rhome before being added to the patient's medical chart.
+          With your permission, the AI scribe will create a temporary audio recording solely for the purpose of drafting a clinical summary. This summary will be reviewed and finalized by the doctors at Fairmont Obstetrics & Gynecology before being added to the patient's medical chart.
         </p>
         <p>
           Participation in this process is entirely optional. Your privacy is protected throughout, and you may decline or withdraw consent at any time without any impact on the quality or continuity of care.
@@ -283,6 +287,19 @@ function App() {
             value={form.date}
             onChange={handleChange}
           />
+        </label>
+      </div>
+
+      <div className="form-group">
+        <label>
+          Doctor:
+          <select name="doctor" value={form.doctor} onChange={handleChange}>
+            <option value="">Select a doctor</option>
+            <option value="Dr. Stephanie Rhone">Dr. Stephanie Rhone</option>
+            <option value="Dr. Chelsea Elwood">Dr. Chelsea Elwood</option>
+            <option value="Dr. Stephanie Fisher">Dr. Stephanie Fisher</option>
+            <option value="Dr. Ana Sosa Cazales">Dr. Ana Sosa Cazales</option>
+          </select>
         </label>
       </div>
 

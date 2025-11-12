@@ -44,6 +44,7 @@ h1 {
   border-radius: 10px;
   margin-bottom: 30px;
   border-left: 4px solid #667eea;
+  border-right: 4px solid #667eea;
 }
 
 .intro-section p {
@@ -89,6 +90,31 @@ input[type="date"]:focus {
   border-color: #667eea;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
+
+select {
+  width: 100%;
+  padding: 12px 16px;
+  margin-top: 6px;
+  border: 2px solid #e1e8ed;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  background-color: #fff;
+  color: #2c3e50;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='10' viewBox='0 0 14 10'><path fill='%23667eea' d='M7 10L0 0h14z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 12px;
+  cursor: pointer;
+}
+
+select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
 
 .sig-section {
   margin-top: 35px;
