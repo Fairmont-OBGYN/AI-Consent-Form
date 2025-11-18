@@ -35,7 +35,8 @@ function Confirmation() {
     }
   };
 
-  const doctorEmail = "fairmontobgyn@gmail.com"; // Doctor's email address
+  const storedEmail = sessionStorage.getItem("doctorEmail");
+  const doctorEmail = storedEmail || "fairmontobgyn@gmail.com";
 
   return (
     <div className="form-container">

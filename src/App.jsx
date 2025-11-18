@@ -15,6 +15,13 @@ function App() {
     doctor: "",
   });
 
+  const doctorEmailMap = {
+  "Dr. Stephanie Rhone": "stephanie.rhone@fairmontobgyn.ca",
+  "Dr. Chelsea Elwood": "chelsea.elwood@fairmontobgyn.ca",
+  "Dr. Stephanie Fisher": "stephanie.fisher@fairmontobgyn.ca",
+  "Dr. Ana Sosa Cazales": "ana.sosa@fairmontobgyn.ca",
+};
+
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   const handleChange = (e) => {
@@ -209,6 +216,9 @@ function App() {
       
       // Store PDF in sessionStorage for confirmation page
       sessionStorage.setItem("consentFormPdf", pdfBase64);
+      
+      const selectedDoctorEmail = doctorEmailMap[form.doctor];
+      sessionStorage.setItem("doctorEmail", selectedDoctorEmail);
       
       // Navigate to confirmation page
       setShowConfirmation(true);
